@@ -1,0 +1,37 @@
+.wrapper {
+  position: relative;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  width: 180px;
+  background-color: white;
+  gap: 20px;
+  font-size: 14px;
+  box-shadow: 0 1px 15px -5px #c5c4c4;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.body {
+  position: absolute;
+  top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-block: 10px;
+  width: 100%;
+  background-color: white;
+  font-size: 14px;
+  box-shadow: 0 1px 15px -5px #c5c4c4;
+  border-radius: 5px;
+
+  &__item {
+    cursor: pointer;
+    padding-inline: 25px;
+  }
+}

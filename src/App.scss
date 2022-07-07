@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;600;800&family=Bellefair&family=Nunito+Sans:wght@300;600;800&display=swap');
+
+$dark_elements: hsl(209, 23%, 22%);
+$dark_bg: hsl(209, 23%, 22%);
+$light_text: hsl(200, 15%, 8%);
+$light_input: hsl(0, 0%, 52%);
+$light_bg: hsl(0, 0%, 98%);
+$white: hsl(0, 0%, 100%);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  //font-family: 'Barlow Condensed', sans-serif;
+  //font-family: 'Bellefair', serif;
+  font-family: 'Nunito Sans', sans-serif;
+  background-color: $light_bg;
+}
+
+.home_text {
+  font-size: 14px;
+}
+
+.detail_text {
+  font-size: 16px;
+}
+
+.container {
+  padding-inline: 10px;
+  width: 100vw;
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+
+

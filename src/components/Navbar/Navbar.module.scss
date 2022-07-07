@@ -1,0 +1,29 @@
+.wrapper {
+  height: 70px;
+  width: 100vw;
+  box-shadow: 0 1px 7px 3px rgba(190, 187, 187, 0.66);
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  padding-inline: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  max-width: 1440px;
+
+  &__logo {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  &__mode{
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+    cursor: pointer;
+  }
+}
