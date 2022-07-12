@@ -2,6 +2,7 @@ import React from 'react';
 import classes from "./Home.module.scss"
 import Input from "../../components/UI/Input/Input";
 import Filter from "../../components/UI/Filter/Filter";
+import List from "../../components/List/List";
 
 
 const Home = () => {
@@ -11,6 +12,7 @@ const Home = () => {
                 <Input/>
                 <Filter/>
             </div>
+            <List/>
         </div>
     );
 };

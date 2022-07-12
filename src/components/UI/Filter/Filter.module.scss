@@ -22,7 +22,6 @@
   top: 50px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
   padding-block: 10px;
   width: 100%;
   background-color: white;
@@ -32,6 +31,10 @@
 
   &__item {
     cursor: pointer;
-    padding-inline: 25px;
+    padding: 5px 25px;
+
+    //&:hover {
+    //  background-color: var($light_input);
+    //}
   }
 }
