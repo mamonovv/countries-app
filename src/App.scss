@@ -1,5 +1,5 @@
-@use "scss/_variables.scss" as v;
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;600;800&family=Bellefair&family=Nunito+Sans:wght@300;600;800&display=swap');
+@import "scss/variables";
 
 * {
   margin: 0;
@@ -11,7 +11,7 @@ body {
   //font-family: 'Barlow Condensed', sans-serif;
   //font-family: 'Bellefair', serif;
   font-family: 'Nunito Sans', sans-serif;
-  background-color: v.$light_bg;
+  background-color: var(--light_bg);
 }
 
 .container {

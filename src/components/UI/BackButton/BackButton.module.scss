@@ -1,0 +1,12 @@
+.button {
+  box-shadow: var(--button-shadow);
+  padding: 10px 35px;
+  background: none;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+}

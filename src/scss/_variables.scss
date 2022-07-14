@@ -1,15 +1,16 @@
-$dark_elements: hsl(209, 23%, 22%);
-$dark_bg: hsl(209, 23%, 22%);
-$light_text: hsl(200, 15%, 8%);
-$light_input: hsl(0, 0%, 52%);
-$light_bg: hsl(0, 0%, 98%);
-$white: hsl(0, 0%, 100%);
+:root {
+  --dark_elements: hsl(209, 23%, 22%);
+  --dark_bg: hsl(209, 23%, 22%);
+  --light_text: hsl(200, 15%, 8%);
+  --light_input: hsl(0, 0%, 52%);
+  --light_bg: hsl(0, 0%, 98%);
+  --white: hsl(0, 0%, 100%);
 
-.home_text {
-  font-size: 14px;
-}
+  --home_text: 14px;
+  --detail_text: 16px;
 
-.detail_text {
-  font-size: 16px;
+  --shadow: 0 1px 15px -5px #c5c4c4;
+  --button-shadow: 0 0 5px 0 #c5c4c4;
+  --radius: 5px;
 }
 

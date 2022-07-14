@@ -1,0 +1,33 @@
+.card {
+  width: 300px;
+  border-radius: var(--radius);
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+
+  &__flag {
+    border-radius: var(--radius) var(--radius) 0 0;
+    width: 100%;
+    height: auto;
+  }
+
+  &__text {
+    padding: 20px;
+  }
+
+  &__header {
+    margin-bottom: 15px;
+    font-size: var(--detail_text);
+  }
+
+  &__desc {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--home_text);
+    gap: 5px;
+    margin-bottom: 20px;
+
+    span {
+      font-weight: 700;
+    }
+  }
+}

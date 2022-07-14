@@ -1,0 +1,45 @@
+.container {
+  margin-top: 80px;
+}
+
+.content {
+  margin-top: 80px;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+
+  &__flag {
+    width: 600px;
+  }
+
+  &__desc {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__header {
+    font-size: 35px;
+    font-weight: 900;
+  }
+
+  &__info {
+    display: flex;
+    gap: 130px;
+    line-height: 30px;
+
+  }
+
+  &__row {
+    span {
+      font-weight: 700;
+    }
+  }
+
+  &__border {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    font-weight: 700;
+  }
+}
