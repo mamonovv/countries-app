@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {FC} from 'react';
 import classes from './Button.module.scss'
 
-const Button = () => {
+interface ButtonProps {
+    border: string
+}
+
+const Button: FC<ButtonProps> = ({border}) => {
     return (
         <button className={classes.button}>
-            France
+            {border}
         </button>
     );
 };

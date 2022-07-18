@@ -1,18 +1,21 @@
 import React, {FC} from 'react';
 import classes from './ListItem.module.scss'
 import {ICountry} from "../../types/ICountry";
+import {useNavigate} from "react-router-dom";
 
 interface ListItemProps {
     country: ICountry
 }
 
 const ListItem: FC<ListItemProps> = ({country}) => {
+    const navigator = useNavigate()
+
     return (
-        <div className={classes.card}>
+        <div className={classes.card} onClick={() => navigator(`/detail/${country.name.official}`)}>
             <div className={classes.flagHolder}>
                 <img className={classes.card__flag}
                      src={country.flags.svg}
-                     alt={country.name.common}/>
+                     alt={country.name.official}/>
             </div>
 
             <div className={classes.card__text}>

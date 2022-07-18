@@ -8,9 +8,6 @@ interface ListProps {
 }
 
 const List: FC<ListProps> = ({countries}) => {
-
-    console.log(countries[0])
-
     return (
         <div className={classes.container}>
             {countries.map((country) => (

@@ -6,7 +6,9 @@ import List from "../../components/List/List";
 import CountriesService from "../../services/CountriesService";
 import {useFetching} from "../../hooks/useFetching";
 import {ICountry} from "../../types/ICountry";
+import {getFromLocalStorage, setInLocalStorage} from "../../helpers/localStorage";
 
+const LS_COUNTRIES = 'LS_COUNTRIES'
 
 const Home = () => {
 
@@ -16,11 +18,14 @@ const Home = () => {
         async () => {
             const response = await CountriesService.getAll();
             setCountries(response.data)
+            setInLocalStorage(LS_COUNTRIES, response.data)
         }
     )
 
     useEffect(() => {
-        fetchCountries()
+        const c = getFromLocalStorage(LS_COUNTRIES)
+        setCountries(c)
+        if (c.length === 0) fetchCountries()
     }, [])
 
     return (
@@ -29,7 +34,7 @@ const Home = () => {
                 <Input/>
                 <Filter/>
             </div>
-            {isCountriesLoading
+            {isCountriesLoading || countries.length === 0
                 ? <div className={classes.loading}>Loading...</div>
                 : <List countries={countries}/>
             }

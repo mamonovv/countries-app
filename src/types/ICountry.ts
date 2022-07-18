@@ -5,6 +5,11 @@ export interface ICountry {
     continent: string
     population: number,
     capital: string
+    subregion: string
+    tld: string[]
+    currencies: Currency[]
+    languages: string[]
+    borders: string[]
 }
 
 interface CountryName {
@@ -15,4 +20,9 @@ interface CountryName {
 interface Flags {
     png: string,
     svg: string
+}
+
+interface Currency {
+    name: string,
+    symbol: string
 }
