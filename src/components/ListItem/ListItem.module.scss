@@ -4,10 +4,16 @@
   background-color: var(--white);
   box-shadow: var(--shadow);
 
+  &__flagHolder {
+    width: 200px;
+    height: 200px;
+  }
+
   &__flag {
     border-radius: var(--radius) var(--radius) 0 0;
     width: 100%;
-    height: auto;
+    height: 160px;
+    object-fit: fill;
   }
 
   &__text {

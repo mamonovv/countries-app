@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {FC} from 'react';
 import classes from './List.module.scss'
 import ListItem from "../ListItem/ListItem";
+import {ICountry} from "../../types/ICountry";
 
-const List = () => {
+interface ListProps {
+    countries: ICountry[]
+}
+
+const List: FC<ListProps> = ({countries}) => {
+
+    console.log(countries[0])
+
     return (
         <div className={classes.container}>
-            <ListItem/>
-            <ListItem/>
-            <ListItem/>
-            <ListItem/>
-            <ListItem/>
+            {countries.map((country) => (
+                <ListItem key={country.name.official} country={country}/>
+            ))}
         </div>
     );
 };
