@@ -1,11 +1,22 @@
-import React, {useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {faChevronDown} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import classes from './Filter.module.scss'
+import {useDebounce} from "../../../hooks/useDebounce";
 
-const Filter = () => {
+interface FilterProps {
+    search: (region: string) => void,
+}
+
+const Filter: FC<FilterProps> = ({search}) => {
     const [isOpen, setIsOpen] = useState(false)
     const [filter, setFilter] = useState('Filter by Region')
+
+    const debounced = useDebounce(filter);
+
+    useEffect(() => {
+        search(debounced)
+    }, [debounced])
 
     const regions = ['All', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
 
@@ -22,7 +33,7 @@ const Filter = () => {
             </div>
             {isOpen && <div className={classes.body}>
                 {regions.map(region => (
-                    <div onClick={() => chooseRegion(region)} className={classes.body__item}>{region}</div>
+                    <div key={region} onClick={() => chooseRegion(region)} className={classes.body__item}>{region}</div>
                 ))}
             </div>
             }

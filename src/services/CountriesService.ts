@@ -17,4 +17,16 @@ export default class CountriesService {
             }
         )
     }
+
+    static async getByPartOfName(name: string) {
+        return await axios.get<ICountry[]>(
+            `https://restcountries.com/v3.1/name/${name}`
+        )
+    }
+
+    static async getByRegion(region: string) {
+        return await axios.get<ICountry[]>(
+            `https://restcountries.com/v3.1/region/${region}`
+        )
+    }
 }

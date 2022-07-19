@@ -22,6 +22,22 @@ const Home = () => {
         }
     )
 
+    const [fetchCountriesByName, isCountriesByNameLoading, countriesByNameError] = useFetching(
+        async (name: string) => {
+            if (!name) return setCountries(getFromLocalStorage(LS_COUNTRIES));
+            const response = await CountriesService.getByPartOfName(name)
+            setCountries(response.data)
+        }
+    )
+
+    const [fetchCountriesByRegion, isCountriesByRegionLoading, countriesByRegionError] = useFetching(
+        async (region: string) => {
+            if (region === 'All') return setCountries(getFromLocalStorage(LS_COUNTRIES));
+            const response = await CountriesService.getByRegion(region)
+            setCountries(response.data)
+        }
+    )
+
     useEffect(() => {
         const c = getFromLocalStorage(LS_COUNTRIES)
         setCountries(c)
@@ -31,12 +47,14 @@ const Home = () => {
     return (
         <div>
             <div className={classes.search}>
-                <Input/>
-                <Filter/>
+                <Input search={fetchCountriesByName}/>
+                <Filter search={fetchCountriesByRegion}/>
             </div>
-            {isCountriesLoading || countries.length === 0
+            {isCountriesLoading || isCountriesByNameLoading || isCountriesByRegionLoading
                 ? <div className={classes.loading}>Loading...</div>
-                : <List countries={countries}/>
+                : countriesByNameError !== '' && countriesByRegionError !== '' && countriesError !== ''
+                    ? <div className={classes.loading}>There is no countries with that name. Try again!</div>
+                    : <List countries={countries}/>
             }
         </div>
     );
