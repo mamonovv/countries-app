@@ -12,9 +12,9 @@ const ListItem: FC<ListItemProps> = ({country}) => {
 
     return (
         <div className={classes.card} onClick={() => navigator(`/detail/${country.name.official}`)}>
-            <div className={classes.flagHolder}>
+            <div className={classes.card__flagHolder}>
                 <img className={classes.card__flag}
-                     src={country.flags.svg}
+                     src={country.flags.png}
                      alt={country.name.official}/>
             </div>
 
