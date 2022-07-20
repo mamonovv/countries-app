@@ -10,21 +10,25 @@ import {ICountry} from "../../types/ICountry";
 const Detail = () => {
     const navigator = useNavigate()
     const [country, setCountry] = useState<ICountry>()
-    const {name} = useParams()
+    const {code} = useParams()
 
     const [fetchCountry, isCountryLoading, countryError] = useFetching(
         async () => {
-            const response = await CountriesService.getByName(name ?? '');
+            const response = await CountriesService.getByCode(code ?? '');
             setCountry(response.data[0])
         }
     )
 
     useEffect(() => {
         fetchCountry()
-    }, [])
+    }, [code])
 
     const handleBack = () => {
         navigator('/')
+    }
+
+    const handleBordered = (name: string) => {
+        navigator(`/detail/${name}`)
     }
 
     return (
@@ -62,10 +66,14 @@ const Detail = () => {
                                 </div>
                             </div>
                             {country?.borders && <div className={classes.content__border}>
-                                Border Countries:
-                                {country?.borders.map(border => (
-                                    <Button key={border} border={border}/>
-                                ))}
+                                <div className={classes.content__name}>
+                                    Border Countries:
+                                </div>
+                                <div className={classes.content__wrapper}>
+                                    {country?.borders.map(border => (
+                                        <Button onClick={handleBordered} key={border} border={border}/>
+                                    ))}
+                                </div>
                             </div>}
                         </div>
                     </div>

@@ -18,6 +18,12 @@ export default class CountriesService {
         )
     }
 
+    static async getByCode(code: string) {
+        return await axios.get<ICountry[]>(
+            `https://restcountries.com/v3.1/alpha/${code}`
+        )
+    }
+
     static async getByPartOfName(name: string) {
         return await axios.get<ICountry[]>(
             `https://restcountries.com/v3.1/name/${name}`

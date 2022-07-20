@@ -10,6 +10,8 @@ export interface ICountry {
     currencies: Currency[]
     languages: string[]
     borders: string[]
+    cioc: string
+    cca2: string
 }
 
 interface CountryName {

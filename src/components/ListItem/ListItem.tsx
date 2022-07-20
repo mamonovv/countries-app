@@ -11,7 +11,7 @@ const ListItem: FC<ListItemProps> = ({country}) => {
     const navigator = useNavigate()
 
     return (
-        <div className={classes.card} onClick={() => navigator(`/detail/${country.name.official}`)}>
+        <div className={classes.card} onClick={() => navigator(`/detail/${country.cca2}`)}>
             <div className={classes.card__flagHolder}>
                 <img className={classes.card__flag}
                      src={country.flags.png}
