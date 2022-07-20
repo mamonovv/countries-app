@@ -3,12 +3,13 @@
   display: flex;
   align-items: center;
   border-radius: 5px;
+  width: 450px;
 }
 
 .input {
   outline: none;
-  width: 450px;
   border: none;
+  width: 100%;
   padding: 15px 15px 15px 70px;
   box-shadow: var(--shadow);
   background-color: var(--elements-bg);
@@ -24,5 +25,11 @@
   position: absolute;
   left: 30px;
   color: var(--text-color);
+}
+
+@media screen and (max-width: 700px) {
+  .wrapper {
+    width: 90%;
+  }
 }
 

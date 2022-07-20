@@ -15,7 +15,7 @@ const Filter: FC<FilterProps> = ({search}) => {
     const debounced = useDebounce(filter);
 
     useEffect(() => {
-        search(debounced)
+        if (debounced !== 'Filter by Region') search(debounced)
     }, [debounced])
 
     const regions = ['All', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']

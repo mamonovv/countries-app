@@ -14,7 +14,7 @@ const LS_COUNTRIES = 'LS_COUNTRIES'
 const Home = () => {
     const [countries, setCountries] = useState<ICountry[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [countriesPerPage] = useState(8)
+    const [countriesPerPage, setCountriesPerPage] = useState(8)
     const totalPages = Math.ceil(countries.length / countriesPerPage)
 
     const [currentCountries, setCurrentCountries] = useState<ICountry[]>([])
@@ -44,6 +44,10 @@ const Home = () => {
     )
 
     useEffect(() => {
+        if (window.innerWidth > 1200) setCountriesPerPage(8)
+        else if (window.innerWidth > 800) setCountriesPerPage(6)
+        else if (window.innerWidth > 550) setCountriesPerPage(4)
+        else setCountriesPerPage(2)
         const c = getFromLocalStorage(LS_COUNTRIES)
         setCountries(c)
         if (c.length === 0) fetchCountries()
@@ -71,7 +75,7 @@ const Home = () => {
             </div>
             {isCountriesLoading || isCountriesByNameLoading || isCountriesByRegionLoading
                 ? <div className={classes.loading}>Loading...</div>
-                : countriesByNameError !== '' && countriesByRegionError !== ''
+                : countriesByNameError !== '' || countriesByRegionError !== ''
                     ? <div className={classes.loading}>There is no countries with that name. Try again!</div>
                     : <List countries={currentCountries}/>
             }
