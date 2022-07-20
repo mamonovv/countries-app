@@ -4,4 +4,16 @@
   height: 70px;
   justify-content: center;
   align-items: center;
+  color: var(--text-color);
+  gap: 20px;
+}
+
+button {
+  background: var(--elements);
+  padding: 10px;
+  box-shadow: var(--button-shadow);
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  border-radius: var(--radius);
 }
