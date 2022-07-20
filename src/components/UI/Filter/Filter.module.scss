@@ -1,5 +1,6 @@
 .wrapper {
   position: relative;
+  color: var(--text-color);
 }
 
 .head {
@@ -8,10 +9,10 @@
   justify-content: center;
   height: 45px;
   width: 180px;
-  background-color: white;
+  background: var(--background);
   gap: 20px;
   font-size: 14px;
-  box-shadow: 0 1px 15px -5px #c5c4c4;
+  box-shadow: var(--shadow);
   border-radius: 5px;
   cursor: pointer;
 
@@ -24,9 +25,9 @@
   flex-direction: column;
   padding-block: 10px;
   width: 100%;
-  background-color: white;
+  background: var(--background);
   font-size: 14px;
-  box-shadow: 0 1px 15px -5px #c5c4c4;
+  box-shadow: var(--shadow);
   border-radius: 5px;
 
   &__item {
@@ -34,7 +35,7 @@
     padding: 5px 25px;
 
     &:hover {
-      background-color: var(--light_input);
+      background-color: var(--input-color);
     }
   }
 }

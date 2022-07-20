@@ -2,8 +2,9 @@
   cursor: pointer;
   width: 100%;
   border-radius: var(--radius);
-  background-color: var(--white);
+  background-color: var(--background);
   box-shadow: var(--shadow);
+  color: var(--text-color);
 
   &__flagHolder {
     width: 100%;
@@ -24,13 +25,13 @@
 
   &__header {
     margin-bottom: 15px;
-    font-size: var(--detail_text);
+    font-size: var(--detail-text);
   }
 
   &__desc {
     display: flex;
     flex-direction: column;
-    font-size: var(--home_text);
+    font-size: var(--home-text);
     gap: 5px;
     margin-bottom: 20px;
 

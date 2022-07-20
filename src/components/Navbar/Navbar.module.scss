@@ -1,9 +1,10 @@
 .wrapper {
   height: 70px;
   width: 100vw;
-  box-shadow: 0 1px 7px 3px rgba(190, 187, 187, 0.66);
+  box-shadow: var(--shadow);
   display: flex;
   justify-content: center;
+  background-color: var(--elements-bg);
 }
 
 .container {
@@ -13,6 +14,7 @@
   justify-content: space-between;
   width: 100vw;
   max-width: 1440px;
+  color: var(--text-color);
 
   &__logo {
     font-size: 20px;
