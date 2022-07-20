@@ -26,6 +26,7 @@
   &__header {
     margin-bottom: 15px;
     font-size: var(--detail-text);
+    height: 45px;
   }
 
   &__desc {
@@ -33,7 +34,6 @@
     flex-direction: column;
     font-size: var(--home-text);
     gap: 5px;
-    margin-bottom: 20px;
 
     span {
       font-weight: 700;

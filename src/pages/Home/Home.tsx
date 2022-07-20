@@ -7,12 +7,17 @@ import CountriesService from "../../services/CountriesService";
 import {useFetching} from "../../hooks/useFetching";
 import {ICountry} from "../../types/ICountry";
 import {getFromLocalStorage, setInLocalStorage} from "../../helpers/localStorage";
+import Pagination from "../../components/UI/Pagination/Pagination";
 
 const LS_COUNTRIES = 'LS_COUNTRIES'
 
 const Home = () => {
-
     const [countries, setCountries] = useState<ICountry[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [countriesPerPage] = useState(8)
+    const totalPages = Math.ceil(countries.length / countriesPerPage)
+
+    const [currentCountries, setCurrentCountries] = useState<ICountry[]>([])
 
     const [fetchCountries, isCountriesLoading, countriesError] = useFetching(
         async () => {
@@ -44,19 +49,36 @@ const Home = () => {
         if (c.length === 0) fetchCountries()
     }, [])
 
+    useEffect(() => {
+        const indexOfLastCountry = currentPage * countriesPerPage;
+        const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+        setCurrentCountries(countries.slice(indexOfFirstCountry, indexOfLastCountry))
+    }, [countries, currentPage])
+
+    const handleNextPage = () => {
+        currentPage === totalPages ? setCurrentPage(1) : setCurrentPage(currentPage + 1)
+    }
+
+    const handlePrevPage = () => {
+        currentPage === 1 ? setCurrentPage(totalPages) : setCurrentPage(currentPage - 1)
+    }
+
     return (
-        <div>
+        <div className={classes.wrapper}>
             <div className={classes.search}>
                 <Input search={fetchCountriesByName}/>
                 <Filter search={fetchCountriesByRegion}/>
             </div>
             {isCountriesLoading || isCountriesByNameLoading || isCountriesByRegionLoading
                 ? <div className={classes.loading}>Loading...</div>
-                : countriesByNameError !== '' && countriesByRegionError !== '' && countriesError !== ''
+                : countriesByNameError !== '' && countriesByRegionError !== ''
                     ? <div className={classes.loading}>There is no countries with that name. Try again!</div>
-                    : <List countries={countries}/>
+                    : <List countries={currentCountries}/>
             }
+            <Pagination nextPage={handleNextPage} prevPage={handlePrevPage} currentPage={currentPage}
+                        totalPages={totalPages}/>
         </div>
+
     );
 };
 
