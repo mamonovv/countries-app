@@ -4,14 +4,17 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMoon} from '@fortawesome/free-regular-svg-icons'
 import {faMoon as faMoonSolid} from '@fortawesome/free-solid-svg-icons'
 import {useNavigate} from "react-router-dom";
-import {ThemeContext} from "../../context/ThemeContext";
+import {LS_THEME_KEY, ThemeContext} from "../../context/ThemeContext";
+import {setInLocalStorage} from "../../helpers/localStorage";
 
 const Navbar = () => {
     const navigator = useNavigate()
     const {theme, setTheme} = useContext(ThemeContext)
 
     const toggleTheme = () => {
-        setTheme(theme === 'light' ? 'dark' : 'light');
+        const newTheme = theme === 'light' ? 'dark' : 'light'
+        setTheme(newTheme);
+        setInLocalStorage(LS_THEME_KEY, newTheme)
     }
 
     return (
