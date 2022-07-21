@@ -1,8 +1,9 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {faChevronDown} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import classes from './Filter.module.scss'
 import {useDebounce} from "../../../hooks/useDebounce";
+import {useHandleClickOutside} from "../../../hooks/useHandleClickOutside";
 
 interface FilterProps {
     search: (region: string) => void,
@@ -11,6 +12,8 @@ interface FilterProps {
 const Filter: FC<FilterProps> = ({search}) => {
     const [isOpen, setIsOpen] = useState(false)
     const [filter, setFilter] = useState('Filter by Region')
+    const filterRef = useRef(null)
+    useHandleClickOutside(filterRef, (state: boolean) => setIsOpen(state))
 
     const debounced = useDebounce(filter);
 
@@ -26,7 +29,7 @@ const Filter: FC<FilterProps> = ({search}) => {
     }
 
     return (
-        <div className={classes.wrapper}>
+        <div className={classes.wrapper} ref={filterRef}>
             <div className={classes.head} onClick={() => setIsOpen(!isOpen)}>
                 {filter}
                 <FontAwesomeIcon icon={faChevronDown}/>
