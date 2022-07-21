@@ -13,33 +13,36 @@ const LS_COUNTRIES = 'LS_COUNTRIES'
 
 const Home = () => {
     const [countries, setCountries] = useState<ICountry[]>([]);
+    const [currentCountries, setCurrentCountries] = useState<ICountry[]>([])
+    const [filteredCountries, setFilteredCountries] = useState<ICountry[]>([])
+    const [inputValue, setInputValue] = useState('')
+
     const [currentPage, setCurrentPage] = useState(1);
     const [countriesPerPage, setCountriesPerPage] = useState(8)
-    const totalPages = Math.ceil(countries.length / countriesPerPage)
 
-    const [currentCountries, setCurrentCountries] = useState<ICountry[]>([])
+    const getTotalPages = () => Math.ceil(filteredCountries.length / countriesPerPage)
 
     const [fetchCountries, isCountriesLoading, countriesError] = useFetching(
         async () => {
             const response = await CountriesService.getAll();
             setCountries(response.data)
+            setFilteredCountries(response.data)
             setInLocalStorage(LS_COUNTRIES, response.data)
-        }
-    )
-
-    const [fetchCountriesByName, isCountriesByNameLoading, countriesByNameError] = useFetching(
-        async (name: string) => {
-            if (!name) return setCountries(getFromLocalStorage(LS_COUNTRIES));
-            const response = await CountriesService.getByPartOfName(name)
-            setCountries(response.data)
         }
     )
 
     const [fetchCountriesByRegion, isCountriesByRegionLoading, countriesByRegionError] = useFetching(
         async (region: string) => {
-            if (region === 'All') return setCountries(getFromLocalStorage(LS_COUNTRIES));
+            setInputValue('')
+            if (region === 'All') {
+                const c = getFromLocalStorage(LS_COUNTRIES)
+                setFilteredCountries(c);
+                setCountries(c)
+                return
+            }
             const response = await CountriesService.getByRegion(region)
             setCountries(response.data)
+            setFilteredCountries(response.data)
         }
     )
 
@@ -50,37 +53,45 @@ const Home = () => {
         else setCountriesPerPage(2)
         const c = getFromLocalStorage(LS_COUNTRIES)
         setCountries(c)
+        setFilteredCountries(c)
         if (c.length === 0) fetchCountries()
+        setInputValue('')
     }, [])
 
     useEffect(() => {
         const indexOfLastCountry = currentPage * countriesPerPage;
         const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
-        setCurrentCountries(countries.slice(indexOfFirstCountry, indexOfLastCountry))
-    }, [countries, currentPage])
+        setCurrentCountries(filteredCountries.slice(indexOfFirstCountry, indexOfLastCountry))
+    }, [filteredCountries, currentPage])
 
     const handleNextPage = () => {
-        currentPage === totalPages ? setCurrentPage(1) : setCurrentPage(currentPage + 1)
+        currentPage === getTotalPages() ? setCurrentPage(1) : setCurrentPage(currentPage + 1)
     }
 
     const handlePrevPage = () => {
-        currentPage === 1 ? setCurrentPage(totalPages) : setCurrentPage(currentPage - 1)
+        currentPage === 1 ? setCurrentPage(getTotalPages()) : setCurrentPage(currentPage - 1)
+    }
+    const handleInput = (name: string) => {
+        setFilteredCountries(countries.filter((country) => country.name.official.toLowerCase().includes(name.toLowerCase())))
+        setCurrentPage(1);
     }
 
     return (
         <div className={classes.wrapper}>
             <div className={classes.search}>
-                <Input search={fetchCountriesByName}/>
+                <Input search={handleInput} inputValue={inputValue} setInputValue={setInputValue}/>
                 <Filter search={fetchCountriesByRegion}/>
             </div>
-            {isCountriesLoading || isCountriesByNameLoading || isCountriesByRegionLoading
+            {isCountriesLoading || isCountriesByRegionLoading
                 ? <div className={classes.loading}>Loading...</div>
-                : countriesByNameError !== '' || countriesByRegionError !== ''
+                : countriesByRegionError !== '' || filteredCountries.length === 0
                     ? <div className={classes.loading}>There is no countries with that name. Try again!</div>
-                    : <List countries={currentCountries}/>
+                    : <>
+                        <List countries={currentCountries}/>
+                        <Pagination nextPage={handleNextPage} prevPage={handlePrevPage} currentPage={currentPage}
+                                    totalPages={getTotalPages()}/>
+                    </>
             }
-            <Pagination nextPage={handleNextPage} prevPage={handlePrevPage} currentPage={currentPage}
-                        totalPages={totalPages}/>
         </div>
 
     );
