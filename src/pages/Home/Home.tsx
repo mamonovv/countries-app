@@ -8,6 +8,7 @@ import {useFetching} from "../../hooks/useFetching";
 import {ICountry} from "../../types/ICountry";
 import {getFromLocalStorage, setInLocalStorage} from "../../helpers/localStorage";
 import Pagination from "../../components/UI/Pagination/Pagination";
+import Loader from "../../components/UI/Loader/Loader";
 
 const LS_COUNTRIES = 'LS_COUNTRIES'
 
@@ -83,7 +84,9 @@ const Home = () => {
                 <Filter search={fetchCountriesByRegion}/>
             </div>
             {isCountriesLoading || isCountriesByRegionLoading
-                ? <div className={classes.loading}>Loading...</div>
+                ? <div className={classes.loading}>
+                    <Loader/>
+                </div>
                 : countriesByRegionError !== '' || filteredCountries.length === 0
                     ? <div className={classes.loading}>There is no countries with that name. Try again!</div>
                     : <>

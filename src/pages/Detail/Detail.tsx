@@ -6,6 +6,7 @@ import CountriesService from "../../services/CountriesService";
 import {useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
 import {ICountry} from "../../types/ICountry";
+import Loader from "../../components/UI/Loader/Loader";
 
 const Detail = () => {
     const navigator = useNavigate()
@@ -33,9 +34,9 @@ const Detail = () => {
 
     return (
         <div className={classes.container}>
-            {isCountryLoading && <div className={classes.loading}>Loading...</div>}
-            {!isCountryLoading &&
-                <>
+            {isCountryLoading
+                ? <div className={classes.loading}><Loader/></div>
+                : <>
                     <BackButton onClick={handleBack}/>
                     <div className={classes.content}>
                         <img className={classes.content__flag}
